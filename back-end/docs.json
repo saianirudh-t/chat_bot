@@ -1,0 +1,16 @@
+[
+  { "title": "Refunds", "content": "Refunds are allowed within 7 days of purchase. No exceptions are made after 8 days." },
+  { "title": "Password Reset", "content": "Reset password from Settings > Security. An email link will be sent to your registered address." },
+  { "title": "Account Deletion", "content": "To delete your account, contact support or use the 'Close Account' button in Privacy settings." },
+  { "title": "Subscription Plans", "content": "We offer Basic ($10/mo), Pro ($20/mo), and Enterprise (custom pricing)." },
+  { "title": "Payment Methods", "content": "We accept Visa, Mastercard, American Express, PayPal, and Apple Pay." },
+  { "title": "Two-Factor Auth", "content": "Enable 2FA via the Security tab using any standard authenticator app like Google or Authy." },
+  { "title": "API Rate Limits", "content": "Standard users are limited to 100 requests per 15 minutes to ensure server stability." },
+  { "title": "Data Privacy", "content": "We do not sell user data. All data is encrypted at rest using AES-256 standards." },
+  { "title": "Mobile App", "content": "Our app is available on both iOS and Android. Search for 'ChatBot Pro' in the store." },
+  { "title": "Customer Support", "content": "Support is available 24/7 via email at support@example.com or live chat on the website." },
+  { "title": "Shipping Policy", "content": "Digital goods are delivered instantly. Physical goods ship within 3-5 business days." },
+  { "title": "Trial Period", "content": "New users get a 14-day free trial of the Pro features. No credit card required." },
+  { "title": "Company Location", "content": "Our headquarters are located in Hyderabad, Telangana, India." },
+  { "title": "Language Support", "content": "Currently, we only provide official documentation and support in English." }
+]
