@@ -7,7 +7,7 @@
   { "title": "Two-Factor Auth", "content": "Enable 2FA via the Security tab using any standard authenticator app like Google or Authy." },
   { "title": "API Rate Limits", "content": "Standard users are limited to 100 requests per 15 minutes to ensure server stability." },
   { "title": "Data Privacy", "content": "We do not sell user data. All data is encrypted at rest using AES-256 standards." },
-  { "title": "Mobile App", "content": "Our app is available on both iOS and Android. Search for 'ChatBot Pro' in the store." },
+  { "title": "Mobile App", "content": "Our   app is available on both iOS and Android. Search for 'ChatBot Pro' in the store." },
   { "title": "Customer Support", "content": "Support is available 24/7 via email at support@example.com or live chat on the website." },
   { "title": "Shipping Policy", "content": "Digital goods are delivered instantly. Physical goods ship within 3-5 business days." },
   { "title": "Trial Period", "content": "New users get a 14-day free trial of the Pro features. No credit card required." },
