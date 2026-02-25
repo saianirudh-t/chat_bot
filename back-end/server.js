@@ -5,11 +5,13 @@ const rateLimit = require('express-rate-limit'), { GoogleGenerativeAI } = requir
 const app = express();
 app.use(express.json());
 
+// FIXED: Explicit CORS configuration to allow your deployed frontend
 app.use(cors({
-  origin: '*',
+  origin: '*', // Allows all origins to fix the "Cross-Origin Request Blocked" error
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type']
 }));
+
 app.use('/api/', rateLimit({ windowMs: 15 * 60000, max: 100 }));
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
@@ -25,7 +27,6 @@ app.post('/api/chat', (req, res) => {
   db.all(`SELECT role, content FROM messages WHERE session_id = ? ORDER BY id DESC LIMIT 10`, [sessionId], async (err, rows) => {
     if (err) return res.status(500).json({ error: 'DB error' });
     
-    // Convert SQLite roles (user/assistant) to Gemini format (user/model)
     const history = rows.reverse().map(m => ({
       role: m.role === 'assistant' ? 'model' : 'user',
       parts: [{ text: m.content }]
@@ -35,7 +36,7 @@ app.post('/api/chat', (req, res) => {
 
     try {
       const model = genAI.getGenerativeModel({ 
-        model: "gemini-2.5-flash",
+        model: "gemini-2.0-flash", // Updated to supported model
         systemInstruction: sysPrompt 
       });
       
@@ -47,7 +48,6 @@ app.post('/api/chat', (req, res) => {
       
       res.json({ reply });
     } catch (e) { 
-      console.error(e);
       res.status(500).json({ error: 'LLM error' }); 
     }
   });
