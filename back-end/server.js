@@ -4,7 +4,12 @@ const rateLimit = require('express-rate-limit'), { GoogleGenerativeAI } = requir
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type']
+}));
 app.use('/api/', rateLimit({ windowMs: 15 * 60000, max: 100 }));
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
