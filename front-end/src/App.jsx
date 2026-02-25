@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
-import './App.css'
-const API = import.meta.env.VITE_API_URL;
+import './App.css';
+
+// FIXED: Added a fallback to ensure it doesn't default to localhost if the variable is missing
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://back-end-3kz5.onrender.com';
 
 export default function App() {
   const [sessionId, setSessionId] = useState('');
@@ -22,9 +24,9 @@ export default function App() {
 
   const fetchHistory = async (id) => {
     try {
-      const { data } = await axios.get(`${API}/api/conversations/${id}`);
+      const { data } = await axios.get(`${API_BASE_URL}/api/conversations/${id}`);
       setMessages(data);
-    } catch (err) { console.error(err); }
+    } catch (err) { console.error("History fetch failed:", err); }
   };
 
   const handleSend = async () => {
@@ -35,10 +37,10 @@ export default function App() {
     setLoading(true);
 
     try {
-      const { data } = await axios.post(`${API}/api/chat`, { sessionId, message: userMsg });
+      const { data } = await axios.post(`${API_BASE_URL}/api/chat`, { sessionId, message: userMsg });
       setMessages(prev => [...prev, { role: 'assistant', content: data.reply, created_at: new Date() }]);
     } catch (err) {
-      setMessages(prev => [...prev, { role: 'assistant', content: 'Server error.', created_at: new Date() }]);
+      setMessages(prev => [...prev, { role: 'assistant', content: 'Server error. Check CORS/API URL.', created_at: new Date() }]);
     } finally { setLoading(false); }
   };
 
@@ -51,7 +53,10 @@ export default function App() {
 
   return (
     <div className="chat-app">
-      <button onClick={newChat}>+ New Chat</button>
+      <div className="header">
+         <button onClick={newChat}>+ New Chat</button>
+         <span className="status">● Online</span>
+      </div>
       
       <div className="chat-window">
         {messages.map((m, i) => (
