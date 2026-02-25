@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 import './App.css'
+const API = import.meta.env.VITE_API_URL;
 
 export default function App() {
   const [sessionId, setSessionId] = useState('');
@@ -21,7 +22,7 @@ export default function App() {
 
   const fetchHistory = async (id) => {
     try {
-      const { data } = await axios.get(`http://localhost:3000/api/conversations/${id}`);
+      const { data } = await axios.get(`${API}/api/conversations/${id}`);
       setMessages(data);
     } catch (err) { console.error(err); }
   };
@@ -34,7 +35,7 @@ export default function App() {
     setLoading(true);
 
     try {
-      const { data } = await axios.post('http://localhost:3000/api/chat', { sessionId, message: userMsg });
+      const { data } = await axios.post(`${API}/api/chat`, { sessionId, message: userMsg });
       setMessages(prev => [...prev, { role: 'assistant', content: data.reply, created_at: new Date() }]);
     } catch (err) {
       setMessages(prev => [...prev, { role: 'assistant', content: 'Server error.', created_at: new Date() }]);
